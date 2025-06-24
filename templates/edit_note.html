@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Note</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Note</h2>
+        <a href="{{ url_for('my_notes') }}">← Back to My Notes</a>
+
+        <form method="POST">
+            <textarea name="note" rows="10" cols="50" required>{{ note.note }}</textarea><br><br>
+            <button type="submit">Update Note</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

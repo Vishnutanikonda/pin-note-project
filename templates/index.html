@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pin Note</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+  <div class="container" id="registrationPage">
+    <h2>Register</h2>
+    <input type="text" placeholder="Name" />
+    <input type="text" placeholder="Last Name" />
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <button onclick="goToLogin()">Register</button>
+  </div>
+
+  <div class="container" id="loginPage" style="display: none;">
+    <h2>Login</h2>
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div class="container" id="dashboardPage" style="display: none;">
+    <h2>Welcome to Pin Note Dashboard!</h2>
+    <button onclick="goToNotePage()">Pin Note</button>
+  </div>
+
+  <div class="container" id="notePage" style="display: block;">
+    <h2>Notes</h2>
+    <form method="POST" action="/">
+      <textarea name="note" rows="10" cols="30" placeholder="Write your note here..."></textarea><br><br>
+      <button type="submit">Save Note</button>
+    </form>
+    <br>
+    <form method="GET" action="/">
+      <input type="date" name="date" required>
+      <button type="submit">Retrieve Note</button>
+    </form>
+    {% if note_data %}
+    <div style="margin-top:20px;">
+      <h4>Note for {{ note_data.date }}</h4>
+      <p>{{ note_data.note }}</p>
+    </div>
+    {% endif %}
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

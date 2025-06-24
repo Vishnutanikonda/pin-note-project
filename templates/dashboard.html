@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <a href="{{ url_for('my_notes') }}">View All My Notes</a>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, {{ session.email }}</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <form method="POST">
+      <textarea name="note" rows=10 id="notecontent" placeholder="Write your note here..." oninput="autoresize(this)"></textarea>
+      <button type="submit">Save Note</button>
+   
+    </form>
+    <form method="GET">
+      <input type="date" name="date" required>
+      <button type="submit">Retrieve Note</button>
+    </form>
+    {% if note_data %}
+      <div>
+        <h4>Note for {{ note_data.date }}</h4>
+        <p>{{ note_data.note }}</p>
+      </div>
+      
+    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <p style="color: {{ 'red' if category == 'error' else 'green' }}">{{ message }}</p>
+      {% endfor %}
+    {% endwith %}
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
